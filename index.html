@@ -2,22 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>aka.ly</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <h1>aka</h1>
   <h2>Also Known As</h2>
-
-  <div class="team-names">AHMED · KARIM · ASH</div>
-
+  <div class="names">
+    <span>AHMED</span>
+    <span>KARIM</span>
+    <span>ASH</span>
+  </div>
   <p>
-    منصة تقنية شبابية متعددة الهويات، تختبر مفاهيم جديدة في البرمجة، التفاعل، وتجربة الاستخدام.  
-    aka.ly هو مختبرنا الرقمي الأولي، وخطوتنا الأولى نحو مشروع أكبر.
+    منصة تقنية شبابية متعددة الهويات، تختبر مفاهيم جديدة في البرمجة، التفاعل، وتجربة الاستخدام.
   </p>
+  <button id="activateBtn">Test Environment</button>
+  <div id="message" class="hidden">
+    🚀 The system is live!<br/>
+    <span class="quote">"Great things always start small."</span>
+  </div>
 
-  <div class="tagline">Test Environment</div>
+  <canvas id="particlesCanvas"></canvas>
+
+  <script src="script.js"></script>
 </body>
 </html>
