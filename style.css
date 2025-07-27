@@ -14,7 +14,9 @@ body {
   min-height: 100vh;
   flex-direction: column;
   text-align: center;
+  overflow: hidden;
   padding: 20px;
+  position: relative;
 }
 
 h1 {
@@ -22,54 +24,93 @@ h1 {
   font-weight: 700;
   color: #00ffff;
   letter-spacing: 3px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 300;
   color: #cccccc;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-.team-names {
+.names span {
+  display: inline-block;
+  margin: 0 10px;
+  font-weight: 500;
   font-size: 1rem;
-  font-weight: 300;
-  color: #888;
-  margin-bottom: 1.5rem;
-  letter-spacing: 2px;
+  color: #ff8c00;
+  letter-spacing: 1px;
 }
 
 p {
   max-width: 600px;
   font-size: 1rem;
   color: #aaaaaa;
-  margin-bottom: 3rem;
+  margin: 1.5rem 0;
 }
 
-.tagline {
-  background: #222;
-  color: #888;
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
+button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  border: none;
+  background: #00ffff;
+  color: #000;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+button:hover {
+  background: #00cccc;
+}
+
+#message {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: #00ff99;
+  transition: opacity 0.5s ease;
+  z-index: 2;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.quote {
+  display: block;
+  font-size: 1rem;
+  color: #cccccc;
+  margin-top: 10px;
+}
+
+canvas#particlesCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 @media (max-width: 600px) {
   h1 {
-    font-size: 2.8rem;
+    font-size: 3rem;
   }
 
   h2 {
-    font-size: 1.2rem;
-  }
-
-  .team-names {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   p {
+    font-size: 0.9rem;
+  }
+
+  .names span {
     font-size: 0.9rem;
   }
 }
