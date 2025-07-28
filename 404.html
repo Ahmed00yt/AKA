@@ -1,113 +1,83 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>404 | aka.ly</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - الصفحة مش موجودة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body, html {
-      height: 100%;
-      overflow: hidden;
-      font-family: 'Poppins', sans-serif;
-      background: #0f0f0f;
-      color: #fff;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
       direction: rtl;
-      text-align: center;
     }
-    #particles-js {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 0;
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: radial-gradient(circle at center, #1e1e1e, #111);
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
     }
     .container {
-      position: relative;
-      z-index: 2;
-      top: 50%; transform: translateY(-50%);
-      padding: 0 20px;
-      animation: fadeIn 1s ease-out;
+      text-align: center;
+      z-index: 1;
     }
     h1 {
-      font-size: 4.5rem;
-      color: #ff5555;
+      font-size: 6rem;
+      color: #ff4d4d;
       margin-bottom: 0.3em;
-      animation: popIn 0.6s ease-out;
     }
     h2 {
-      font-size: 1.5rem;
-      font-weight: 300;
-      color: #cccccc;
-      margin-bottom: 1.5rem;
-      animation: fadeIn 1s 0.5s forwards;
-      opacity: 0;
+      font-size: 1.8rem;
+      margin-bottom: 0.5em;
+      color: #eee;
     }
     p {
-      font-size: 1rem;
-      color: #aaaaaa;
-      margin-bottom: 2rem;
-      animation: fadeIn 1s 0.8s forwards;
-      opacity: 0;
+      font-size: 1.1rem;
+      color: #aaa;
+      margin-bottom: 1.5em;
     }
-    a.button {
-      display: inline-block;
-      padding: 12px 28px;
-      background: #00ffff;
-      color: #000;
-      border-radius: 25px;
-      font-weight: 500;
+    a {
+      padding: 0.7em 1.5em;
+      background: #ff4d4d;
+      color: white;
       text-decoration: none;
-      transition: transform 0.2s, background 0.3s;
-      animation: fadeIn 1s 1.1s forwards;
-      opacity: 0;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s;
     }
-    a.button:hover {
-      background: #00cccc;
-      transform: scale(1.05);
+    a:hover {
+      background: #e43c3c;
+    }
+    /* نجوم خفيفة بالخلفية */
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent url('https://i.imgur.com/7NlcZrI.png') repeat;
+      animation: moveStars 100s linear infinite;
+      opacity: 0.15;
+      z-index: 0;
     }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-    @keyframes popIn {
-      0% { transform: scale(0.5) translateY(-50%); opacity: 0; }
-      100% { transform: scale(1) translateY(-50%); opacity: 1; }
+    @keyframes moveStars {
+      from { background-position: 0 0; }
+      to { background-position: 10000px 5000px; }
     }
   </style>
 </head>
 <body>
-  <div id="particles-js"></div>
-
+  <div class="stars"></div>
   <div class="container">
-    <h1>عفواً!</h1>
-    <h2>الصفحة التي تبحث عنها غير موجودة</h2>
-    <p>يبدو أن هناك خطأ ما 🤷‍♂️</p>
-    <a class="button" href="/">العودة إلى الرئيسية</a>
+    <h1>404</h1>
+    <h2>عفواً، الصفحة اللي تدور عليها مش موجودة</h2>
+    <p>يمكن الرابط تغيّر أو الصفحة تم حذفها. تقدر ترجع للصفحة الرئيسية ونبدأ من جديد.</p>
+    <a href="/">الرجوع للصفحة الرئيسية</a>
   </div>
-
-  <!-- مكتبة particles.js -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 60, density: { enable: true, value_area: 700 } },
-        color: { value: "#ffffff" },
-        shape: { type: "circle" },
-        opacity: { value: 0.4, random: true },
-        size: { value: 2, random: true },
-        move: { enable: true, speed: 1.5, out_mode: "out" }
-      },
-      interactivity: {
-        events: {
-          onhover: { enable: true, mode: "repulse" }
-        },
-        modes: {
-          repulse: { distance: 100 }
-        }
-      },
-      retina_detect: true
-    });
-  </script>
 </body>
 </html>
