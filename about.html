@@ -3,69 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About Us | aka.ly</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <title>عن الفريق | aka.ly</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      direction: rtl;
+    }
+
     body {
-      background: linear-gradient(135deg, #0f172a, #111827);
-      color: #ffffff;
       font-family: 'Poppins', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
+      background: linear-gradient(135deg, #000000, #222222);
+      color: #ffffff;
       min-height: 100vh;
       padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     h1 {
-      margin-bottom: 2rem;
-      font-size: 2.5rem;
       color: #00ffff;
-      text-shadow: 0 0 10px #00ffff55;
-    }
-
-    table {
-      border-collapse: collapse;
-      width: 90%;
-      max-width: 1000px;
-      box-shadow: 0 0 15px #00ffff33;
-      background-color: #1a1a1a;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    thead {
-      background-color: #00aaaa;
-    }
-
-    thead th {
-      padding: 15px;
-      font-size: 1.1rem;
-    }
-
-    tbody tr {
-      background-color: #111111;
-      transition: background 0.3s ease;
-    }
-
-    tbody tr:nth-child(even) {
-      background-color: #1b1b1b;
-    }
-
-    tbody td {
-      padding: 15px;
+      margin-bottom: 40px;
+      font-size: 2.5rem;
       text-align: center;
-      font-size: 1rem;
     }
 
-    tbody tr:hover {
-      background-color: #2a2a2a;
+    .team-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 1000px;
+    }
+
+    .card {
+      background-color: #1b1b1b;
+      border: 1px solid #00ffff33;
+      border-radius: 15px;
+      padding: 20px;
+      width: 280px;
+      text-align: center;
+      box-shadow: 0 0 20px #00ffff22;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 30px #00ffff55;
+    }
+
+    .name {
+      font-size: 1.5rem;
+      color: #00ffff;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .country {
+      font-size: 1rem;
+      color: #999;
+      margin-bottom: 8px;
+    }
+
+    .role {
+      font-size: 1rem;
+      color: #ccc;
     }
 
     .back-button {
-      margin-top: 2rem;
+      margin-top: 40px;
       padding: 12px 24px;
       background-color: #00ffff;
       color: #000;
@@ -82,48 +91,36 @@
     }
 
     @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
-      }
-
-      table {
-        font-size: 0.9rem;
-      }
-
-      thead th, tbody td {
-        padding: 10px;
+      .card {
+        width: 100%;
+        max-width: 350px;
       }
     }
   </style>
 </head>
 <body>
-  <h1>About Us</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Country</th>
-        <th>About</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Ahmed</td>
-        <td>Libya</td>
-        <td>Game Developer</td>
-      </tr>
-      <tr>
-        <td>Adlane</td>
-        <td>Algeria</td>
-        <td>Sound Designer</td>
-      </tr>
-      <tr>
-        <td>Karim</td>
-        <td>Morocco</td>
-        <td>Pixel Artist</td>
-      </tr>
-    </tbody>
-  </table>
-  <button class="back-button" onclick="location.href='aka.html'">العودة للرئيسية</button>
+
+  <h1>عن الفريق</h1>
+
+  <div class="team-container">
+    <div class="card">
+      <div class="name">Ahmed</div>
+      <div class="country">ليبيا</div>
+      <div class="role">مطور ألعاب</div>
+    </div>
+    <div class="card">
+      <div class="name">Adlane</div>
+      <div class="country">الجزائر</div>
+      <div class="role">مصمم صوتي</div>
+    </div>
+    <div class="card">
+      <div class="name">Karim</div>
+      <div class="country">المغرب</div>
+      <div class="role">رسام بكسل</div>
+    </div>
+  </div>
+
+  <a class="back-button" href="aka.html">العودة للرئيسية</a>
+
 </body>
 </html>
