@@ -1,3 +1,4 @@
+/* General Reset and Basic Styling */
 * {
   margin: 0;
   padding: 0;
@@ -19,6 +20,7 @@ body {
   position: relative;
 }
 
+/* Headings Styling */
 h1 {
   font-size: 4rem;
   font-weight: 700;
@@ -34,6 +36,7 @@ h2 {
   margin-bottom: 1rem;
 }
 
+/* Names Styling */
 .names span {
   display: inline-block;
   margin: 0 10px;
@@ -43,6 +46,7 @@ h2 {
   letter-spacing: 1px;
 }
 
+/* Paragraph Styling */
 p {
   max-width: 600px;
   font-size: 1rem;
@@ -50,6 +54,7 @@ p {
   margin: 1.5rem 0;
 }
 
+/* Button Styling */
 button {
   padding: 12px 24px;
   font-size: 1rem;
@@ -67,6 +72,7 @@ button:hover {
   background: #00cccc;
 }
 
+/* Message Styling */
 #message {
   margin-top: 2rem;
   font-size: 1.2rem;
@@ -80,6 +86,7 @@ button:hover {
   pointer-events: none;
 }
 
+/* Quote Styling */
 .quote {
   display: block;
   font-size: 1rem;
@@ -87,6 +94,7 @@ button:hover {
   margin-top: 10px;
 }
 
+/* Particle Canvas Styling */
 canvas#particlesCanvas {
   position: fixed;
   top: 0;
@@ -97,6 +105,7 @@ canvas#particlesCanvas {
   pointer-events: none;
 }
 
+/* Mobile Responsive Styles */
 @media (max-width: 600px) {
   h1 {
     font-size: 3rem;
@@ -113,25 +122,22 @@ canvas#particlesCanvas {
   .names span {
     font-size: 0.9rem;
   }
+
+  /* Mobile button adjustments */
+  button {
+    width: 100%;
+    max-width: 300px; /* Prevents buttons from being too wide */
+    margin-bottom: 10px; /* Adds space between buttons */
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-
-body {
-  background: linear-gradient(135deg, #000000, #333333);
-  color: #ffffff;
-  font-family: 'Poppins', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
- flex-direction: column;
-}
+/* Back Button Styling */
 .back-button {
   padding: 10px 20px;
   font-size: 16px;
@@ -140,11 +146,14 @@ body {
   border: 1px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 20px;
 }
 
 .back-button:hover {
   background-color: #ddd;
 }
+
+/* Styling for SOON Text */
 #SOON {
   color: #474d42;
   text-shadow:
