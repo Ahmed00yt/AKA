@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>عن الفريق | aka.ly</title>
+  <title>About Us | aka.ly</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      direction: rtl;
     }
 
     body {
@@ -18,7 +17,7 @@
       background: linear-gradient(135deg, #000000, #222222);
       color: #ffffff;
       min-height: 100vh;
-      padding: 40px 20px;
+      padding: 60px 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -26,56 +25,57 @@
 
     h1 {
       color: #00ffff;
-      margin-bottom: 40px;
-      font-size: 2.5rem;
+      margin-bottom: 60px;
+      font-size: 3.2rem;
       text-align: center;
+      text-shadow: 0 0 10px #00ffff55;
     }
 
     .team-container {
       display: flex;
-      gap: 20px;
+      gap: 30px;
       flex-wrap: wrap;
       justify-content: center;
-      max-width: 1000px;
+      max-width: 1200px;
     }
 
     .card {
-      background-color: #1b1b1b;
-      border: 1px solid #00ffff33;
-      border-radius: 15px;
-      padding: 20px;
-      width: 280px;
+      background-color: #1c1c1c;
+      border: 1px solid #00ffff44;
+      border-radius: 16px;
+      padding: 30px 20px;
+      width: 320px;
       text-align: center;
-      box-shadow: 0 0 20px #00ffff22;
+      box-shadow: 0 0 25px #00ffff22;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 30px #00ffff55;
+      transform: translateY(-8px);
+      box-shadow: 0 0 35px #00ffff66;
     }
 
     .name {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       color: #00ffff;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       font-weight: 600;
     }
 
     .country {
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: #999;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .role {
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: #ccc;
     }
 
     .back-button {
-      margin-top: 40px;
-      padding: 12px 24px;
+      margin-top: 60px;
+      padding: 14px 30px;
       background-color: #00ffff;
       color: #000;
       border: none;
@@ -84,6 +84,7 @@
       text-decoration: none;
       cursor: pointer;
       transition: background 0.3s;
+      font-size: 1rem;
     }
 
     .back-button:hover {
@@ -91,36 +92,44 @@
     }
 
     @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
       .card {
-        width: 100%;
-        max-width: 350px;
+        width: 90%;
+        padding: 20px;
+      }
+
+      .name {
+        font-size: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <h1>عن الفريق</h1>
+  <h1>Meet the Team</h1>
 
   <div class="team-container">
     <div class="card">
       <div class="name">Ahmed</div>
-      <div class="country">ليبيا</div>
-      <div class="role">مطور ألعاب</div>
+      <div class="country">Libya</div>
+      <div class="role">Game Developer</div>
     </div>
     <div class="card">
       <div class="name">Adlane</div>
-      <div class="country">الجزائر</div>
-      <div class="role">مصمم صوتي</div>
+      <div class="country">Algeria</div>
+      <div class="role">Sound Designer</div>
     </div>
     <div class="card">
       <div class="name">Karim</div>
-      <div class="country">المغرب</div>
-      <div class="role">رسام بكسل</div>
+      <div class="country">Morocco</div>
+      <div class="role">Pixel Artist</div>
     </div>
   </div>
 
-  <a class="back-button" href="aka.html">العودة للرئيسية</a>
+  <a class="back-button" href="aka.html">Back to Home</a>
 
 </body>
 </html>
