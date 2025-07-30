@@ -19,6 +19,12 @@
       align-items: center;
       direction: rtl;
     }
+    .centered-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
     button {
       padding: 12px 40px;
       border-radius: 30px;
@@ -30,17 +36,29 @@
       cursor: pointer;
       box-shadow: 0 0 15px #00ffff;
       transition: background-color 0.3s ease;
+      margin-bottom: 1.5rem;
     }
     button:hover {
       background-color: #00cccc;
       box-shadow: 0 0 20px #00cccc;
     }
+    img {
+      display: block;
+      margin: 0 auto;
+      border-radius: 16px;
+      box-shadow: 0 0 18px rgba(0,255,255,0.4);
+      width: 200px;
+      height: 100px;
+      object-fit: cover;
+    }
   </style>
 </head>
 <body>
-  <button onclick="window.open('https://buymeacoffee.com', '_blank')">
-    ادعمنا
-  </button>
-      <img src="anime-sip.gif"> </IMG>
+  <div class="centered-content">
+    <button onclick="window.open('https://buymeacoffee.com', '_blank')">
+      ادعمنا
+    </button>
+    <img src="anime-sip.gif" alt="Donate">
+  </div>
 </body>
 </html>
