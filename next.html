@@ -19,6 +19,26 @@
       align-items: center;
       direction: rtl;
     }
+    .corner-btn {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 10;
+      padding: 12px 32px;
+      border-radius: 30px;
+      background-color: #00ffff;
+      color: #000;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 15px #00ffff;
+      transition: background-color 0.3s ease;
+    }
+    .corner-btn:hover {
+      background-color: #00cccc;
+      box-shadow: 0 0 20px #00cccc;
+    }
     .centered-content {
       display: flex;
       flex-direction: column;
@@ -54,6 +74,9 @@
   </style>
 </head>
 <body>
+<button class="corner-btn" onclick="window.location.href='https://aka.ly'">
+  الرجوع للصفحة الرئيسية
+</button>
   <div class="centered-content">
     <button onclick="window.open('https://buymeacoffee.com', '_blank')">
       ادعمنا

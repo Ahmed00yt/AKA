@@ -173,3 +173,14 @@ button:hover {
     font-size: 1rem;
     padding: 10px 20px;
   }
+  .instagram-icon {
+  width: 32px;
+  height: 32px;
+  margin-top: 15px;
+  border-radius: 6px;
+  transition: transform 0.3s ease;
+}
+
+.instagram-icon:hover {
+  transform: scale(1.1);
+}
