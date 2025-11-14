@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Final Stage</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: black; /* أو خليها صورة تيراريا */
+        color: white;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    h1 {
+        font-size: 3em;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 1.2em;
+        margin-bottom: 40px;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 1em;
+        border-radius: 5px;
+        border: none;
+        text-align: center;
+    }
+
+    #winMessage {
+        font-size: 2em;
+        margin-top: 30px;
+        display: none;
+        color: gold;
+    }
+
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+
+<h1>Welcome to the End</h1>
+<p>الان المرحلة الاخيرة التي تفصل الناس وتخسر في الاغلبية<br>هو سؤال واحد لكنه من اصعب الاسئلة<br>من هو صديق احمد المفضل؟</p>
+
+<input type="text" id="answer" placeholder="اكتب هنا..." />
+
+<div id="winMessage">YOU WIN<br>NOW GO AND DM ME IN DISCORD WITH THIS PIN :987123</div>
+
+<canvas id="particles"></canvas>
+
+<script>
+// إعداد الكانفس للـ particles
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particlesArray = [];
+
+class Particle {
+    constructor(x, y){
+        this.x = x;
+        this.y = y;
+        this.size = Math.random() * 5 + 2;
+        this.speedX = (Math.random() - 0.5) * 5;
+        this.speedY = (Math.random() - 0.5) * 5;
+        this.color = 'gold';
+    }
+
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if(this.size > 0.2) this.size -= 0.1;
+    }
+
+    draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+function handleParticles() {
+    for(let i = 0; i < particlesArray.length; i++){
+        particlesArray[i].update();
+        particlesArray[i].draw();
+        if(particlesArray[i].size <= 0.2){
+            particlesArray.splice(i, 1);
+            i--;
+        }
+    }
+}
+
+function createParticles(x, y, count){
+    for(let i = 0; i < count; i++){
+        particlesArray.push(new Particle(x, y));
+    }
+}
+
+function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    handleParticles();
+    requestAnimationFrame(animate);
+}
+animate();
+
+// التحقق من الإجابة
+document.getElementById('answer').addEventListener('keyup', function(e){
+    const val = e.target.value.trim().toLowerCase();
+    if(val === 'yousef' || val === 'يوسف'){
+        createParticles(canvas.width/2, canvas.height/2, 100);
+        document.getElementById('winMessage').style.display = 'block';
+    }
+});
+</script>
+
+</body>
+</html>
