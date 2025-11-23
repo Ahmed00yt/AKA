@@ -3,7 +3,7 @@ name: Send file by email
 on:
   push:
     paths:
-      - "404.html"   # غيّرها لمسار الملف اللي تبيه
+      - "404.html"   # غيّرها لمسار الملف اللي تبي ترسله
 
 jobs:
   send_email:
@@ -16,12 +16,12 @@ jobs:
       - name: Send email with attachment
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp.gmail.com
-          server_port: 465
+          server_address: smtp.office365.com
+          server_port: 587          # استخدم TLS
           username: ${{ secrets.EMAIL_USER }}
           password: ${{ secrets.EMAIL_PASS }}
           subject: "ملفك من GitHub"
           body: "تم تحديث الملف وهذه نسخة مرفقة."
-          to: "ahmedartime48@gmail.com"
-          from: "daily7report@outlook.com"
-          attachments: "404.html"
+          to: "ahmedartime48@gmail.com"   # الإيميل اللي يوصله الملف
+          from: ${{ secrets.EMAIL_USER }} # لازم نفس إيميل Outlook
+          attachments: "404.html"          # نفس المسار في المستودع
