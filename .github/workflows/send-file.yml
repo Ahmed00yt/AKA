@@ -1,27 +1,32 @@
-name: Send file by email
+name: Send file on update
 
 on:
   push:
     paths:
-      - "404.html"   # غيّرها لمسار الملف اللي تبي ترسله
+      - "404.html"   # غيّر هذا للملف اللي تريد متابعته
 
 jobs:
   send_email:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Send email with attachment
-        uses: dawidd6/action-send-mail@v3
+      - name: Send mail via Outlook
+        uses: dawidd6/action-send-mail@v6
         with:
           server_address: smtp.office365.com
-          server_port: 587          # استخدم TLS
-          username: ${{ secrets.EMAIL_USER }}
-          password: ${{ secrets.EMAIL_PASS }}
-          subject: "ملفك من GitHub"
-          body: "تم تحديث الملف وهذه نسخة مرفقة."
-          to: "ahmedartime48@gmail.com"   # الإيميل اللي يوصله الملف
-          from: ${{ secrets.EMAIL_USER }} # لازم نفس إيميل Outlook
-          attachments: "404.html"          # نفس المسار في المستودع
+          server_port: 587
+          secure: true
+          username: ${{ secrets.EMAIL_USER }}    # إيميل Outlook المرسل
+          password: ${{ secrets.EMAIL_PASS }}    # App Password من Outlook
+          subject: "GitHub Actions - File Updated"
+          to: "ahmedartime48@gmail.com"          # الإيميل اللي تبي توصله
+          from: ${{ secrets.EMAIL_USER }}        # نفس إيميل Outlook
+          body: "تم تحديث الملف في المستودع: ${{ github.repository }}"
+          attachments: "404.html"                 # أي ملف تريد إرساله كمرفق
+          convert_markdown: true
+          priority: normal
+          nodemailerlog: false
+          nodemailerdebug: false
