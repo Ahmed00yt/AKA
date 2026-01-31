@@ -50,7 +50,7 @@ function loadQuestion(){
   questionText.textContent = q.text;
   optionsDiv.innerHTML = '';
   extraDiv.textContent = '';
-  commentDiv.textContent = q.comment || '';
+  commentDiv.textContent = q.comment || ''; // يظهر تحت الخيارات على اليسار
   progress.textContent = `السؤال ${current+1} من ${questions.length}`;
   startTimer();
 
@@ -80,7 +80,7 @@ function selectAnswer(index,button){
         questionText.textContent="🎉 أحسنت! أنهيت Phase 1";
         optionsDiv.innerHTML='';
         timerDiv.textContent='';
-        // الكود السري
+        // الكود السري الكبير
         progress.innerHTML = 'كودك السري هو';
         extraDiv.innerHTML = '<span id="secretCode">#double</span>';
       }
