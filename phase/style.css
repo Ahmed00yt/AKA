@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', cursive;
+  background: linear-gradient(180deg, #0b1d0b, #000);
+  color: #eaffea;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#3aff3a 3px, transparent 3px);
+  background-size: 50px 50px;
+  animation: starsMove 20s linear infinite;
+  opacity: 0.2;
+}
+
+@keyframes starsMove {
+  from { background-position: 0 0; }
+  to { background-position: 0 500px; }
+}
+
+.game-box {
+  position: relative;
+  background: #0f2a0f;
+  border: 8px solid #3aff3a;
+  padding: 50px;
+  width: 90%;
+  max-width: 1000px;
+  min-height: 600px;
+  box-shadow: 0 0 0 4px #000, 0 0 60px #3aff3a;
+  animation: float 3s ease-in-out infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+h1 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 40px;
+  color: #7dff7d;
+  text-shadow: 0 0 15px #3aff3a;
+}
+
+.question { font-size: 24px; margin-bottom: 20px; text-align: center; }
+.comment { font-size: 16px; color: #9aff9a; margin-bottom: 20px; text-align: left; opacity: 0.9; }
+.extra { margin-top: 16px; font-size: 18px; color: #b6ffb6; text-align: center; }
+.options { display: grid; grid-template-columns: 1fr; gap: 20px; width: 100%; max-width: 700px; }
+button.option {
+  font-family: inherit;
+  background: #102b10;
+  color: #eaffea;
+  border: 5px solid #3aff3a;
+  padding: 20px;
+  cursor: pointer;
+  font-size: 22px;
+  border-radius: 8px;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+button.option:hover {
+  background: #164016;
+  transform: translateY(-4px);
+  box-shadow: 0 0 16px #3aff3a;
+}
+button.option.correct { background: #1f6b1f; box-shadow: 0 0 28px #3aff3a; }
+button.option.wrong { background: #6b1f1f; box-shadow: 0 0 28px #ff3a3a; }
+
+.progress { margin-top: 30px; text-align: center; font-size: 18px; color: #9aff9a; }
+.timer { text-align: center; margin-top: 16px; font-size: 18px; color: #ffdf7d; }
