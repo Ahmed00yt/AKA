@@ -82,3 +82,11 @@ button.option.wrong { background: #6b1f1f; box-shadow: 0 0 28px #ff3a3a; }
 
 .progress { margin-top: 30px; text-align: center; font-size: 18px; color: #9aff9a; }
 .timer { text-align: center; margin-top: 16px; font-size: 18px; color: #ffdf7d; }
+
+#secretCode {
+  font-size: 60px;
+  font-weight: bold;
+  color: #3aff3a;
+  text-shadow: 0 0 30px #7dff7d;
+  margin-top: 40px;
+}
