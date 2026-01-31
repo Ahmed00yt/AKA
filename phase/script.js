@@ -80,7 +80,9 @@ function selectAnswer(index,button){
         questionText.textContent="🎉 أحسنت! أنهيت Phase 1";
         optionsDiv.innerHTML='';
         timerDiv.textContent='';
-        progress.textContent="جاهز للمرحلة التالية 🚀";
+        // الكود السري
+        progress.innerHTML = 'كودك السري هو';
+        extraDiv.innerHTML = '<span id="secretCode">#double</span>';
       }
     },1200);
   } else {
