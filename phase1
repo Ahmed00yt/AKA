@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Phase 1 | Craftino Quest</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Press Start 2P', cursive;
+      background: linear-gradient(180deg, #0b1d0b, #000);
+      color: #eaffea;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(#3aff3a 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: starsMove 20s linear infinite;
+      opacity: 0.15;
+    }
+
+    @keyframes starsMove {
+      from { background-position: 0 0; }
+      to { background-position: 0 400px; }
+    }
+
+    .game-box {
+      position: relative;
+      background: #0f2a0f;
+      border: 4px solid #3aff3a;
+      padding: 32px;
+      width: 90%;
+      max-width: 700px;
+      box-shadow: 0 0 0 4px #000, 0 0 40px #3aff3a;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 24px;
+      color: #7dff7d;
+      text-shadow: 0 0 10px #3aff3a;
+    }
+
+    .question {
+      font-size: 14px;
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+
+    .comment {
+      font-size: 10px;
+      color: #9aff9a;
+      margin-bottom: 14px;
+      text-align: left;
+      opacity: 0.8;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    button.option {
+      font-family: inherit;
+      background: #102b10;
+      color: #eaffea;
+      border: 3px solid #3aff3a;
+      padding: 12px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+
+    button.option:hover {
+      background: #164016;
+      transform: translateY(-2px);
+      box-shadow: 0 0 12px #3aff3a;
+    }
+
+    button.option.correct {
+      background: #1f6b1f;
+      box-shadow: 0 0 20px #3aff3a;
+    }
+
+    button.option.wrong {
+      background: #6b1f1f;
+      box-shadow: 0 0 20px #ff3a3a;
+    }
+
+    .extra {
+      margin-top: 12px;
+      font-size: 10px;
+      color: #b6ffb6;
+    }
+
+    .progress {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #9aff9a;
+    }
+
+    .timer {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 12px;
+      color: #ffdf7d;
+    }
+  </style>
+</head>
+<body>
+
+<div class="game-box">
+  <h1>🧩 Phase 1 – اللغز الأول</h1>
+  <div class="question" id="questionText"></div>
+  <div class="comment" id="comment"></div>
+  <div class="options" id="options"></div>
+  <div class="extra" id="extra"></div>
+  <div class="timer" id="timer"></div>
+  <div class="progress" id="progress"></div>
+</div>
+
+<audio id="soundCorrect" src="https://assets.mixkit.co/sfx/preview/mixkit-video-game-win-2016.mp3"></audio>
+<audio id="soundWrong" src="https://assets.mixkit.co/sfx/preview/mixkit-player-losing-or-failing-2042.mp3"></audio>
+
+<script>
+const questions = [
+  {
+    text: "في أي وقت نزلت لعبة ماينكرافت؟",
+    options: ["2008", "2009", "2010"],
+    answer: 1
+  },
+  {
+    text: "كم تحتاج أوبسيديان لتبني بوابة النذر؟",
+    options: ["8", "10", "12"],
+    answer: 1
+  },
+  {
+    text: "كم يوجد من حرف في الأبجدية؟",
+    options: ["28", "8", "29"],
+    answer: 1,
+    extra: "8 = ا ل ا ب ج د ي ة"
+  },
+  {
+    text: "والد واحد اسمه يوسف، لديه ثلاثة أبناء: مصطفى وأحمد، فمن هو الثالث؟",
+    options: ["كريم", "يوسف", "أحمد"],
+    answer: 1,
+    comment: "منعرفش من وين كريم يجيب في هذي الأسئلة..."
+  },
+  {
+    text: "من اكتشف أمريكا؟",
+    options: ["كريستوفر كولومبوس", "الفايكنج", "أحمد"],
+    answer: 2
+  }
+];
+
+let current = 0;
+let timeLeft = 15;
+let timerInterval;
+
+const questionText = document.getElementById('questionText');
+const optionsDiv = document.getElementById('options');
+const progress = document.getElementById('progress');
+const extraDiv = document.getElementById('extra');
+const commentDiv = document.getElementById('comment');
+const timerDiv = document.getElementById('timer');
+
+const soundCorrect = document.getElementById('soundCorrect');
+const soundWrong = document.getElementById('soundWrong');
+
+function startTimer() {
+  clearInterval(timerInterval);
+  timeLeft = 15;
+  timerDiv.textContent = `⏳ الوقت المتبقي: ${timeLeft}`;
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    timerDiv.textContent = `⏳ الوقت المتبقي: ${timeLeft}`;
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      soundWrong.play();
+      questions.push(questions.splice(current, 1)[0]);
+      loadQuestion();
+    }
+  }, 1000);
+}
+
+function loadQuestion() {
+  const q = questions[current];
+  questionText.textContent = q.text;
+  optionsDiv.innerHTML = '';
+  extraDiv.textContent = '';
+  commentDiv.textContent = q.comment || '';
+  progress.textContent = `السؤال ${current + 1} من ${questions.length}`;
+  startTimer();
+
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.textContent = opt;
+    btn.onclick = () => selectAnswer(i, btn);
+    optionsDiv.appendChild(btn);
+  });
+}
+
+function selectAnswer(index, button) {
+  clearInterval(timerInterval);
+  const q = questions[current];
+  const buttons = document.querySelectorAll('.option');
+  buttons.forEach(b => b.disabled = true);
+
+  if (index === q.answer) {
+    soundCorrect.play();
+    button.classList.add('correct');
+    if (q.extra) extraDiv.textContent = q.extra;
+    setTimeout(() => {
+      current++;
+      if (current < questions.length) {
+        loadQuestion();
+      } else {
+        questionText.textContent = "🎉 أحسنت! أنهيت Phase 1";
+        optionsDiv.innerHTML = '';
+        timerDiv.textContent = '';
+        progress.textContent = "جاهز للمرحلة التالية 🚀";
+      }
+    }, 1200);
+  } else {
+    soundWrong.play();
+    button.classList.add('wrong');
+    questions.push(questions.splice(current, 1)[0]);
+    setTimeout(loadQuestion, 2000);
+  }
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
