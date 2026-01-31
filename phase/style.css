@@ -58,8 +58,6 @@ h1 {
 }
 
 .question { font-size: 24px; margin-bottom: 20px; text-align: center; }
-.comment { font-size: 16px; color: #9aff9a; margin-bottom: 20px; text-align: left; opacity: 0.9; }
-.extra { margin-top: 16px; font-size: 18px; color: #b6ffb6; text-align: center; }
 .options { display: grid; grid-template-columns: 1fr; gap: 20px; width: 100%; max-width: 700px; }
 button.option {
   font-family: inherit;
@@ -80,13 +78,13 @@ button.option:hover {
 button.option.correct { background: #1f6b1f; box-shadow: 0 0 28px #3aff3a; }
 button.option.wrong { background: #6b1f1f; box-shadow: 0 0 28px #ff3a3a; }
 
-.progress { margin-top: 30px; text-align: center; font-size: 18px; color: #9aff9a; }
-.timer { text-align: center; margin-top: 16px; font-size: 18px; color: #ffdf7d; }
-
-#secretCode {
-  font-size: 60px;
-  font-weight: bold;
-  color: #3aff3a;
-  text-shadow: 0 0 30px #7dff7d;
-  margin-top: 40px;
+.comment { 
+  font-size: 16px; 
+  color: #9aff9a; 
+  margin-top: 10px; 
+  text-align: left; /* يسار */
+  align-self: flex-start; /* يثبت على اليسار تحت الخيارات */
+  opacity: 0.9; 
 }
+
+.extra { margin-top: 16px; font-size: 18px; color: #b6ff
