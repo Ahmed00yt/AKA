@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لعبة إكس أو - جوال</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f0f8ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+    padding: 10px;
+  }
+
+  h1 {
+    margin-top: 20px;
+    font-size: 36px;
+    color: #2c7efc;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-width: 350px;
+    margin-top: 30px;
+  }
+
+  .cell {
+    width: 100%;
+    padding-top: 100%; /* مربع */
+    position: relative;
+    background: #fff;
+    border-radius: 15px;
+    cursor: pointer;
+    border: 2px solid #cce0ff;
+    transition: all 0.3s ease;
+  }
+
+  .cell:hover {
+    background: #e6f0ff;
+    transform: scale(1.05);
+  }
+
+  .cell span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 60px;
+    animation: pop 0.3s forwards;
+  }
+
+  @keyframes pop {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1); }
+  }
+
+  #status, #wins {
+    margin-top: 20px;
+    font-size: 22px;
+    text-align: center;
+  }
+
+  #finalMessage {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 20px;
+    text-align: center;
+    display: none;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  #finalMessage h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #2c7efc;
+  }
+
+  #finalMessage p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    white-space: pre-line;
+  }
+
+  #secretCode {
+    font-size: 32px;
+    color: #ff3300;
+    font-weight: bold;
+  }
+
+  #finalMessage button {
+    padding: 12px 20px;
+    font-size: 18px;
+    background: #2c7efc;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  #finalMessage button:hover {
+    background: #1a5fcc;
+  }
+
+</style>
+</head>
+<body>
+
+<h1>لعبة إكس أو</h1>
+<p id="status">دورك (X)</p>
+<p id="wins">انتصاراتك: 0 / 7</p>
+
+<div class="board">
+  <div class="cell" data-index="0"></div>
+  <div class="cell" data-index="1"></div>
+  <div class="cell" data-index="2"></div>
+  <div class="cell" data-index="3"></div>
+  <div class="cell" data-index="4"></div>
+  <div class="cell" data-index="5"></div>
+  <div class="cell" data-index="6"></div>
+  <div class="cell" data-index="7"></div>
+  <div class="cell" data-index="8"></div>
+</div>
+
+<div id="finalMessage">
+  <h2 id="finalTitle"></h2>
+  <p id="finalText"></p>
+  <div id="finalButtons"></div>
+</div>
+
+<script>
+const cells = document.querySelectorAll(".cell");
+const statusText = document.getElementById("status");
+const winsText = document.getElementById("wins");
+const finalMessage = document.getElementById("finalMessage");
+const finalTitle = document.getElementById("finalTitle");
+const finalText = document.getElementById("finalText");
+const finalButtons = document.getElementById("finalButtons");
+
+let board = ["","","","","","","","",""];
+let gameActive = true;
+let playerWins = 0;
+let targetWins = 7;
+
+const winConditions = [
+  [0,1,2],[3,4,5],[6,7,8],
+  [0,3,6],[1,4,7],[2,5,8],
+  [0,4,8],[2,4,6]
+];
+
+cells.forEach(cell => cell.addEventListener("click", playerMove));
+
+function playerMove(){
+  if(!gameActive) return;
+  const index = Number(this.getAttribute("data-index"));
+  if(board[index] !== "") return;
+
+  board[index] = "X";
+  this.innerHTML = '<span style="color:#2c7efc">X</span>';
+
+  if(checkWinner("X")){
+    playerWins++;
+    winsText.textContent = `انتصاراتك: ${playerWins} / ${targetWins}`;
+    gameActive = false;
+    if(playerWins === targetWins){
+      showEnd(true,true);
+    } else{
+      showEnd(true,false);
+    }
+    return;
+  }
+
+  if(!board.includes("")){ showEnd(null,false); return; }
+
+  setTimeout(botMove, 500);
+}
+
+function botMove(){
+  let empty = board.map((v,i)=>v===""?i:null).filter(v=>v!==null);
+  if(empty.length===0) return;
+
+  // easy-medium AI: sometimes block, sometimes random
+  let move = null;
+  if(Math.random() < 0.6){
+    move = findWinningMove("O") ?? findWinningMove("X");
+  }
+  if(move===null) move = empty[Math.floor(Math.random()*empty.length)];
+
+  board[move] = "O";
+  cells[move].innerHTML = '<span style="color:#ff3300">O</span>';
+
+  if(checkWinner("O")){
+    gameActive=false;
+    showEnd(false,false);
+    return;
+  }
+
+  statusText.textContent = "دورك (X)";
+}
+
+function findWinningMove(sym){
+  for(let cond of winConditions){
+    const vals = cond.map(i=>board[i]);
+    const countSym = vals.filter(v=>v===sym).length;
+    if(countSym===2 && vals.includes("")) return cond.find(i=>board[i]==="");
+  }
+  return null;
+}
+
+function checkWinner(player){
+  return winConditions.some(cond=>cond.every(i=>board[i]===player));
+}
+
+function showEnd(playerWon, final=false){
+  finalMessage.style.display = "block";
+  finalButtons.innerHTML = "";
+  if(final){
+    finalTitle.textContent = "🎉 أحسنت!";
+    finalText.innerHTML = `لقد فزت على البوت (${playerWins}) مرات!\nالكود السري الخاص بك هو <span id="secretCode">#7</span>`;
+    const btn = document.createElement("button");
+    btn.textContent = "إعادة اللعبة";
+    btn.onclick = ()=>{ resetGame(true); finalMessage.style.display="none"; playerWins=0; winsText.textContent=`انتصاراتك: 0 / ${targetWins}`; };
+    finalButtons.appendChild(btn);
+    return;
+  }
+
+  if(playerWon === true){
+    finalTitle.textContent = "فزت! 🎉";
+    finalText.textContent = "يمكنك الانتقال للمرحلة التالية";
+    const btn = document.createElement("button");
+    btn.textContent = "المستوى التالي";
+    btn.onclick = ()=>{ resetGame(true); finalMessage.style.display="none"; };
+    finalButtons.appendChild(btn);
+  } else if(playerWon === false){
+    finalTitle.textContent = "لقد خسرت";
+    finalText.textContent = "اتوقع احمد يعرف يلعب أحسن منك...";
+    const btn = document.createElement("button");
+    btn.textContent = "إعادة المحاولة";
+    btn.onclick = ()=>{ resetGame(false); finalMessage.style.display="none"; };
+    finalButtons.appendChild(btn);
+  } else{
+    finalTitle.textContent = "تعادل!";
+    finalText.textContent = "لا فائز في هذه الجولة";
+    const btn = document.createElement("button");
+    btn.textContent = "إعادة اللعبة";
+    btn.onclick = ()=>{ resetGame(false); finalMessage.style.display="none"; };
+    finalButtons.appendChild(btn);
+  }
+}
+
+function resetGame(nextStage){
+  board = ["","","","","","","","",""];
+  gameActive = true;
+  cells.forEach(c=>c.innerHTML="");
+  statusText.textContent = "دورك (X)";
+}
+</script>
+</body>
+</html>
